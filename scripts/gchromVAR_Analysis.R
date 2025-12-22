@@ -22,16 +22,14 @@ library(JASPAR2024)
 library(pheatmap)
 
 # Load .narrowPeak files
-setwd("~/Thesis/sgEGR1/ATAC-seq/Novogene-3-14-24/ENCODE_Processing/atac-seq-pipeline/hg19_Processing/analysis_peaks/")
-
 peaks <- dir("data/narrowpeaks/", pattern = "*.narrowPeak", full.names = TRUE)
 peaks<-mixedsort(peaks)
 
 myPeaks <- lapply(peaks, ChIPQC:::GetGRanges, simple = TRUE)
 
 names(myPeaks)<-c("ScrmSCF_1","ScrmSCF_2","ScrpSCF_1","ScrpSCF_2")
-#names(myPeaks)<-c("ScrmSCF","ScrpSCF")
-Group<-factor(c(rep("ScrmSCF",1), rep("ScrpSCF",1)))
+#Group<-factor(c(rep("ScrmSCF",1), rep("ScrpSCF",1)))
+
 # Generate consensus counts for the peaks
 consensus_counts_generator<-GRangesList(myPeaks)
 non_overlapping_region_counts<-function(x){
@@ -75,6 +73,7 @@ zscoredf <- reshape2::melt(t(assays(ukbb_wDEV)[["z"]]))
 zscoredf[,2] <- gsub("_PP001", "", zscoredf[,2])
 colnames(zscoredf) <- c("Sample", "Trait", "Z-score")
 
+# Visualizing the accessibility variation between conditions at SNPs by Heatmap                                          
 df_avg <- zscoredf %>%
   mutate(
     base_sample = sub("_[0-9]+_sorted\\.bam$", "", Sample),
