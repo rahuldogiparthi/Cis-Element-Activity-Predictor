@@ -1,7 +1,7 @@
 library(ggplot2)
 
 # Read MAnorm-generated MA values table for all peaks
-df <- read.table("Scr_Plus_SCF_vs_Scr_Minus_SCF_all_MAvalues.xls",
+df <- read.table("/data/manorm/Scr_Plus_SCF_vs_Scr_Minus_SCF_all_MAvalues.xls",
                  header = TRUE, sep = "\t",
                  quote = "", comment.char = "",
                  stringsAsFactors = FALSE, check.names = FALSE)
