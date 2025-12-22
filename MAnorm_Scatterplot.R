@@ -1,12 +1,6 @@
-# =========================
-# MAnorm MA-plot
-# =========================
-
 library(ggplot2)
 
-cutoff <- 0.585
-
-# Read MAnorm-generated table (must be tab-delimited text; .xls name is OK if it's really TSV)
+# Read MAnorm-generated MA values table for all peaks
 df <- read.table("Scr_Plus_SCF_vs_Scr_Minus_SCF_all_MAvalues.xls",
                  header = TRUE, sep = "\t",
                  quote = "", comment.char = "",
@@ -19,7 +13,7 @@ Mcol <- "M_value"
 # Drop rows other than M and A
 plot_df <- na.omit(data.frame(A = A, M = M))
 
-
+cutoff <- 0.585
 plot_df$Class <- "Neutral"
 plot_df$Class[plot_df$M >  cutoff] <- "Kit Activated"
 plot_df$Class[plot_df$M < -cutoff] <- "Kit Repressed"
@@ -38,3 +32,4 @@ sp <- ggplot(plot_df, aes(x = A, y = M, color = Class)) +
   theme(legend.title = element_blank())
 
 sp
+
