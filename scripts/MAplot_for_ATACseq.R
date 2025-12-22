@@ -13,7 +13,8 @@ Mcol <- "M_value"
 # Drop rows other than M and A
 plot_df <- na.omit(data.frame(A = A, M = M))
 
-cutoff <- 0.585
+cutoff <- 0.585 # Fold Change cut off at 1.5 in Log2
+# Divide the peaks into classes based on fold change cutoffs
 plot_df$Class <- "Neutral"
 plot_df$Class[plot_df$M >  cutoff] <- "Kit Activated"
 plot_df$Class[plot_df$M < -cutoff] <- "Kit Repressed"
@@ -30,5 +31,5 @@ sp <- ggplot(plot_df, aes(x = A, y = M, color = Class)) +
        y = "Fold Change (M)") +
   theme_classic(base_size = 12) +
   theme(legend.title = element_blank())
-
-sp
+print(sp)
+ggsave("Fig1_MAnorm.pdf", plot=sp, width = 6, height = 5, units="in")
