@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import matplotlib as mpl
 
-# Inputs acquired from merged datasheets between Log-Odds Ratio & KREs, ATAC-seq Footprint scores
+# Inputs acquired from merged datasheets between Log-Odds Ratio & KREs, ATAC-seq Footprint scores. Replaced accordingly for each analysis
 data = {
     'TF':     ['CTCF',     'CTCFL',     'KLF16',       'REST'],
     'log_odds': [0.137981408, 0.072510256, 0.121389335, 0.111623931],
@@ -46,6 +46,7 @@ scatter = ax.scatter(
 cbar = fig.colorbar(scatter, ax=ax, orientation='vertical', pad=0.02)
 cbar.set_label('Footprint score', fontsize=12)
 
+# KREs legend can be changed as per the dataset in use
 legend_steps = [200, 400, 600, 700]
 for kre in legend_steps:
     ax.scatter([], [], s=(kre / df['KREs'].max()) * 1200,
