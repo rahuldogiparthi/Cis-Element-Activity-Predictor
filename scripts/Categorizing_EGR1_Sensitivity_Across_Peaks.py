@@ -62,6 +62,6 @@ df.loc[df["grid"].isin(ins_base), "EGR1_sensitivity"] = "EGR1_insensitive_neutra
 # print("\nEGR1_sensitivity category counts:")
 # print(df["EGR1_sensitivity"].value_counts())
 
-df.drop("grid",axis=1,inplace=True)
 # df.to_csv("EGR1_Sensitivity_Status_ATAC_peaks.tsv", sep="\t", index=False)
+
 
