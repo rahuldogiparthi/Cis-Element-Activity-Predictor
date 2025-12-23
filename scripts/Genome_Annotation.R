@@ -9,5 +9,7 @@ txdb <- TxDb.Hsapiens.UCSC.hg19.knownGene
 peakAnno <- annotatePeak(peak, TxDb=txdb, tssRegion=c(-1000, 1000))
 
 # Plot Pie chart showing genome compostion
+pdf("Peaks_Annotation.pdf")
 plotAnnoPie(peakAnno)
+dev.off()
 
