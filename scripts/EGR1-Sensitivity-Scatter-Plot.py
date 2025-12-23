@@ -5,7 +5,7 @@ import matplotlib as mpl
 
 # Load dataframe
 
-df = pd.read_csv("EGR1_SCF_log2FC_grid_withIDs.tsv", sep="\t")
+df = pd.read_csv("EGR1_Sensitivity_Status_ATAC_peaks.tsv", sep="\t")
 
 # Thresholds
 up_thr   = 0.585
@@ -76,4 +76,3 @@ plt.tight_layout()
 #plt.savefig("EGR1_Sensitivity_Scatter_Plot.pdf")
 #plt.savefig("EGR1_Sensitivity_Scatter_Plot.png", dpi=1200)
 plt.show()
-
