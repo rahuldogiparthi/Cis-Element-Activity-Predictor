@@ -5,7 +5,7 @@ from sklearn.preprocessing import StandardScaler
 from imblearn.over_sampling import SMOTE
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import accuracy_score, roc_auc_score, average_precision_score, classification_report, roc_curve, precision_recall_curve
+from sklearn.metrics import accuracy_score, roc_auc_score, average_precision_score, classification_report, roc_curve, precision_recall_curve, auc
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import StratifiedKFold, cross_val_score
 from xgboost import XGBClassifier
@@ -369,4 +369,31 @@ importance_df = pd.DataFrame({
 importance_df = importance_df.sort_values(by='Importance_Mean', ascending=False)
 
 #importance_df.to_csv("Kit_permutation_importance_table_100_permutations.csv", index=False)
+
+# Accuracy and AUROC for the tuning adjusted XGBoost Model ('xgb_tuned')
+y_pred = model.predict(X_test)
+
+y_probs = model.predict_proba(X_test)[:, 1]
+accuracy = accuracy_score(y_test, y_pred)
+print(f"Accuracy: {accuracy:.4f}")
+
+# Calculate ROC curve data
+fpr, tpr, thresholds = roc_curve(y_test, y_probs)
+roc_auc = auc(fpr, tpr)
+
+# Plot
+plt.figure(figsize=(6, 6))
+plt.plot(fpr, tpr, color='#2c3e50', lw=2.5, label=f'Model ROC (AUC = {roc_auc:.3f})')
+plt.plot([0, 1], [0, 1], color='grey', lw=1, linestyle='--') # Random guess line
+plt.xlim([-0.02, 1.0])
+plt.ylim([0.0, 1.05])
+plt.xlabel('False Positive Rate', fontsize=12)
+plt.ylabel('True Positive Rate', fontsize=12)
+plt.title('XGBoost AUROC Curve', fontsize=14, fontweight='bold')
+plt.legend(loc="lower right", frameon=True)
+plt.grid(True, linestyle=':', alpha=0.6)
+
+plt.tight_layout()
+#plt.savefig("xgboost-tuned-auroc-curve.pdf", dpi=300)
+plt.show()
 
