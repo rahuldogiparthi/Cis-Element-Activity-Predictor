@@ -333,3 +333,40 @@ positive_shap_values = shap_df[shap_df > 0].mean()
 
 predictors_df = positive_shap_values.sort_values(ascending=False).dropna()
 #predictors_df.to_csv("Kit_Activation_TF_Importance_from_SHAP_XGBoost.csv")
+
+# Step-6: Permutation testing to evaluate the significant features in helping in model performance. Use Step-1 again to read the datasets if running this seperately
+
+# Load the model
+import xgboost as xgb
+
+model = xgb.XGBClassifier()
+model.load_model('data/KIT_xgb_tuned_model.json')
+
+#model.classes_ = np.array([0, 1]) # Use if model fails to identify the class object
+
+
+# Retrive the features of the trained model
+expected_features = model.get_booster().feature_names
+X_test_aligned = X_test[expected_features]
+
+# Perform Permutation Importance
+
+results = permutation_importance(
+    model,
+    X_test_aligned,
+    y_test,
+    scoring='roc_auc',
+    n_repeats=100,
+    random_state=42,
+    n_jobs=None # Adjust jobs as required
+)
+
+importance_df = pd.DataFrame({
+    'Feature': expected_features,
+    'Importance_Mean': results.importances_mean,
+    'Importance_Std': results.importances_std
+})
+importance_df = importance_df.sort_values(by='Importance_Mean', ascending=False)
+
+#importance_df.to_csv("Kit_permutation_importance_table_100_permutations.csv", index=False)
+
