@@ -16,6 +16,7 @@ from tensorflow.keras.layers import Dense, Dropout, BatchNormalization
 from tensorflow.keras.optimizers import Adam
 import matplotlib.pyplot as plt
 import seaborn as sns
+import shap
 
 # Step-1: Preprocessing Datasets
 # Load datasets
@@ -312,8 +313,23 @@ plt.ylim(0, 1)
 plt.show()
 
 
-# Step-4: Save the trained modelz
+# Step-4: Save the trained model
 model_path = "data/KIT_xgb_tuned_model.json"
 xgb_tuned.save_model(model_path)
 print(f"XGBoost model saved at: {model_path}")
 
+# Step-5: Evaluate the feature importances by SHAP
+
+# Initialize SHAP
+explainer = shap.TreeExplainer(xgb_tuned)
+shap_values = explainer.shap_values(X_train)
+shap_df = pd.DataFrame(shap_values, columns=X_train.columns)
+
+# Compute mean SHAP values
+mean_shap_values = shap_df.abs().mean(axis=0)
+
+# Select features which are required in the model training and exclude the others
+positive_shap_values = shap_df[shap_df > 0].mean()
+
+predictors_df = positive_shap_values.sort_values(ascending=False).dropna()
+#predictors_df.to_csv("Kit_Activation_TF_Importance_from_SHAP_XGBoost.csv")
