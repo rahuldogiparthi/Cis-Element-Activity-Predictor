@@ -190,5 +190,130 @@ plt.grid()
 plt.show()
 
 # Step-3: Proceed with XGBoost as the better classification model over others
+from xgboost import XGBClassifier
+from sklearn.model_selection import StratifiedKFold, cross_val_score
+from sklearn.metrics import accuracy_score, roc_auc_score, average_precision_score, classification_report
 
+# Initialize XGBoost with proper tuning
+xgb_tuned = XGBClassifier(
+    n_estimators=500,  
+    learning_rate=0.1,  
+    max_depth=10,  
+    subsample=0.9,  
+    colsample_bytree=0.9,
+    reg_alpha=0.1,  # L1 regularization
+    reg_lambda=0.5,  # L2 regularization
+    random_state=42,
+    n_jobs=-1
+)
+xgb_tuned.fit(X_train, y_train)
+y_pred_xgb = xgb_tuned.predict(X_test)
+y_prob_xgb = xgb_tuned.predict_proba(X_test)[:, 1]  
+
+# Predict on train data (to check overfitting)
+y_pred_train_xgb = xgb_tuned.predict(X_train)
+y_prob_train_xgb = xgb_tuned.predict_proba(X_train)[:, 1]
+
+xgb_test_results = {
+    "Accuracy": accuracy_score(y_test, y_pred_xgb),
+    "AUROC": roc_auc_score(y_test, y_prob_xgb),
+    "AUPR": average_precision_score(y_test, y_prob_xgb),
+    "Classification Report": classification_report(y_test, y_pred_xgb)
+}
+
+# Training Set Evaluation (for Overfitting Detection)
+xgb_train_results = {
+    "Accuracy": accuracy_score(y_train, y_pred_train_xgb),
+    "AUROC": roc_auc_score(y_train, y_prob_train_xgb),
+    "AUPR": average_precision_score(y_train, y_prob_train_xgb)
+}
+
+
+def plot_auroc(y_true, y_prob, dataset_type, model_name="XGBoost"):
+    fpr, tpr, _ = roc_curve(y_true, y_prob)
+    auc_score = roc_auc_score(y_true, y_prob)
+    
+    plt.figure(figsize=(6, 5))
+    plt.plot(fpr, tpr, label=f"{model_name} (AUROC = {auc_score:.3f})", color="blue")
+    plt.plot([0, 1], [0, 1], linestyle="--", color="gray", alpha=0.7)  # Diagonal line
+    plt.xlabel("False Positive Rate (FPR)")
+    plt.ylabel("True Positive Rate (TPR)")
+    plt.title(f"AUROC Curve - {model_name} ({dataset_type})")
+    plt.legend()
+    plt.grid()
+    
+    #plt.savefig(f"{save_path}AUROC_XGBoost_new_{dataset_type}.pdf", format="pdf", bbox_inches="tight")
+    plt.close()
+    print(f"AUROC plot saved: AUROC_XGBoost_new_{dataset_type}.pdf")
+
+
+plot_auroc(y_train, y_prob_train_xgb, "Train")
+plot_auroc(y_test, y_prob_xgb, "Test")
+
+# K-Fold Cross Validation
+kfold = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
+
+cv_accuracy = cross_val_score(xgb_tuned, X_train, y_train, cv=kfold, scoring="accuracy")
+cv_auroc = cross_val_score(xgb_tuned, X_train, y_train, cv=kfold, scoring="roc_auc")
+cv_aupr = cross_val_score(xgb_tuned, X_train, y_train, cv=kfold, scoring="average_precision")
+
+# Compute evaluation metrics
+mean_acc, std_acc = cv_accuracy.mean(), cv_accuracy.std()
+mean_auroc, std_auroc = cv_auroc.mean(), cv_auroc.std()
+mean_aupr, std_aupr = cv_aupr.mean(), cv_aupr.std()
+
+print("\nK-Fold Cross-Validation Results:")
+print(f"Mean Accuracy: {mean_acc:.4f} ± {std_acc:.4f}")
+print(f"Mean AUROC: {mean_auroc:.4f} ± {std_auroc:.4f}")
+print(f"Mean AUPR: {mean_aupr:.4f} ± {std_aupr:.4f}")
+
+# Train on full training set and evaluate test performance
+xgb_tuned.fit(X_train, y_train)
+
+# Predictions
+y_pred_test = xgb_tuned.predict(X_test)
+y_prob_test = xgb_tuned.predict_proba(X_test)[:, 1]
+
+# Evaluate on test set
+test_accuracy = accuracy_score(y_test, y_pred_test)
+test_auroc = roc_auc_score(y_test, y_prob_test)
+test_aupr = average_precision_score(y_test, y_prob_test)
+
+print("\nXGBoost Test Set Results:")
+print(f"Test Accuracy: {test_accuracy:.4f}")
+print(f"Test AUROC: {test_auroc:.4f}")
+print(f"Test AUPR: {test_aupr:.4f}")
+
+# Test for overfitting
+if abs(test_auroc - mean_auroc) > 0.02:
+    print("AUROC Warning: Potential Overfitting Detected!")
+if abs(test_aupr - mean_aupr) > 0.02:
+    print("AUPR Warning: Potential Overfitting Detected!")
+
+
+metrics = ["Accuracy", "AUROC", "AUPR"]
+cv_means = [mean_acc, mean_auroc, mean_aupr]
+cv_stds = [std_acc, std_auroc, std_aupr]
+test_values = [test_accuracy, test_auroc, test_aupr]
+
+plt.figure(figsize=(10, 6))
+x = np.arange(len(metrics))
+
+plt.bar(x - 0.2, cv_means, 0.4, yerr=cv_stds, capsize=0, label="Cross-Validation (Mean ± Std)", alpha=0.7)
+plt.bar(x + 0.2, test_values, 0.4, label="Test Set", alpha=0.7)
+
+plt.xticks(x, metrics, fontsize=12)
+plt.ylabel("Score", fontsize=12)
+plt.title("Cross-Validation vs Test Set Performance", fontsize=14)
+plt.legend()
+plt.ylim(0, 1)
+
+#plt.savefig("Cross-Validation_vs_Test_Set_Performance.pdf", format="pdf", bbox_inches="tight")
+plt.show()
+
+
+# Step-4: Save the trained modelz
+model_path = "data/KIT_xgb_tuned_model.json"
+xgb_tuned.save_model(model_path)
+print(f"XGBoost model saved at: {model_path}")
 
