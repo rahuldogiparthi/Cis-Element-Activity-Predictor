@@ -338,6 +338,7 @@ predictors_df = positive_shap_values.sort_values(ascending=False).dropna()
 
 # Load the model
 import xgboost as xgb
+from scipy.stats import norm 
 
 model = xgb.XGBClassifier()
 model.load_model('data/KIT_xgb_tuned_model.json')
@@ -367,7 +368,8 @@ importance_df = pd.DataFrame({
     'Importance_Std': results.importances_std
 })
 importance_df = importance_df.sort_values(by='Importance_Mean', ascending=False)
-
+importance_df['z_score'] = importance_df['Importance_Mean'] / (importance_df['Importance_Std'] + 1e-9)
+importance_df['p_value'] = 1 - norm.cdf(importance_df['z_score'])
 #importance_df.to_csv("Kit_permutation_importance_table_100_permutations.csv", index=False)
 
 # Accuracy and AUROC for the tuning adjusted XGBoost Model ('xgb_tuned')
