@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 
 # Load dataframe
 
-df = pd.read_csv("EGR1_Sensitivity_Status_ATAC_peaks.tsv", sep="\t")
+df = pd.read_csv("data/EGR1-Sensitive-ATAC/EGR1_Sensitivity_Status_ATAC_peaks.tsv", sep="\t")
 
 # Thresholds adjusted to 1.5 Fold cutoff from the log2 scale.
 
