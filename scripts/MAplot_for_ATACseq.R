@@ -1,7 +1,7 @@
 library(ggplot2)
 
-# Read MAnorm-generated MA values table for all peaks
-df <- read.table("/data/manorm/Scr_Plus_SCF_vs_Scr_Minus_SCF_all_MAvalues.xls",
+# Read MAnorm-generated MA values table.
+df <- read.table("/data/manorm/sgControl_SCF_vs_sgControl_PBS_MAvalues.xls",
                  header = TRUE, sep = "\t",
                  quote = "", comment.char = "",
                  stringsAsFactors = FALSE, check.names = FALSE)
@@ -13,7 +13,7 @@ Mcol <- "M_value"
 # Drop rows other than M and A
 plot_df <- na.omit(data.frame(A = A, M = M))
 
-cutoff <- 0.585 # Fold Change cut off at 1.5 in Log2
+cutoff <- 0.585 # Fold Change cut off at 1.5 in Log2 scale
 # Divide the peaks into classes based on fold change cutoffs
 plot_df$Class <- "Neutral"
 plot_df$Class[plot_df$M >  cutoff] <- "Kit Activated"
