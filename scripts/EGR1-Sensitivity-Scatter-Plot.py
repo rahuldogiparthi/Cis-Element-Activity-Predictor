@@ -1,13 +1,15 @@
+# Load the libraries
+
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
-import matplotlib as mpl
 
 # Load dataframe
 
 df = pd.read_csv("EGR1_Sensitivity_Status_ATAC_peaks.tsv", sep="\t")
 
-# Thresholds
+# Thresholds adjusted to 1.5 Fold cutoff from the log2 scale.
+
 up_thr   = 0.585
 down_thr = -0.585
 df["EGR1_group"] = "Other"
@@ -34,8 +36,8 @@ palette = {
 }
 
 # Create Scatter Plot of peaks
-plt.figure(figsize=(12, 9))
 
+plt.figure(figsize=(12, 9))
 sns.scatterplot(
     data=df,
     x="log2FC_KD",
@@ -53,7 +55,7 @@ for x in [0, up_thr, down_thr]:
 for y in [0, up_thr, down_thr]:
     plt.axhline(y, linestyle="--" if y == 0 else ":", color="gray", alpha=0.7)
 
-# Plot labels for title and axis
+# Labels for title and axis
 plt.xlabel("log2FC (+SCF / −SCF) - sgEGR1", fontsize=14)
 plt.ylabel("log2FC (+SCF / −SCF) - sgControl", fontsize=14)
 plt.title("EGR1 Sensitivity of KIT/SCF Chromatin Responses", fontsize=16)
