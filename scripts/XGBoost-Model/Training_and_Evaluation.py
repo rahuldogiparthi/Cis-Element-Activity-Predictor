@@ -368,6 +368,7 @@ importance_df['z_score'] = importance_df['Importance_Mean'] / (importance_df['Im
 importance_df['p_value'] = 1 - norm.cdf(importance_df['z_score'])
 #importance_df.to_csv("Kit_permutation_importance_table_100_permutations.csv", index=False)
 
+"""
 # Accuracy and AUROC for the tuning adjusted XGBoost Model ('xgb_tuned')
 
 y_pred = model.predict(X_test)
@@ -396,3 +397,4 @@ plt.tight_layout()
 #plt.savefig("xgboost-tuned-auroc-curve.pdf", dpi=300)
 plt.show()
 
+"""
