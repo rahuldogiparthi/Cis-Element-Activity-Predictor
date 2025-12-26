@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 
 # Load data
 
-df = pd.read_csv("data/Kit_Activation_TF_Importance_from_SHAP_XGBoost.csv", header=None, names=["feature", "importance"])
+df = pd.read_csv("data/XGBoost/Kit_Activation_TF_Importance_from_SHAP_XGBoost.csv", header=None, names=["feature", "importance"])
 df["importance"] = pd.to_numeric(df["importance"].astype(str).str.replace(",", ""), errors="coerce")
 df = df.dropna().sort_values("importance", ascending=False).reset_index(drop=True)
 sns.set_theme(style="whitegrid", context="talk")
