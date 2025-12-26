@@ -1,0 +1,43 @@
+name: cis-element-activity-predictor
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - python=3.7.3
+  - r-base=4.4.3
+
+  - numpy
+  - pandas
+  - scikit-learn
+  - matplotlib
+  - seaborn
+  - pip
+
+  - r-dplyr
+  - r-ggplot2
+  - r-data.table
+  - r-pheatmap
+  - r-magrittr
+  - r-tidyr
+  - r-gtools
+  - r-biocparallel
+
+  - bioconductor-genomicranges
+  - bioconductor-rsubread
+  - bioconductor-chipqc
+  - bioconductor-chromvar
+  - bioconductor-summarizedexperiment
+  - bioconductor-genomicalignments
+  - bioconductor-motifmatchr
+  - bioconductor-jaspar2024
+  - bioconductor-bsgenome.hsapiens.ucsc.hg19
+  - bioconductor-chipseeker
+  - bioconductor-txdb.hsapiens.ucsc.hg19.knowngene
+  - bioconductor-org.hs.eg.db
+
+  - pip:
+    - tensorflow
+    - xgboost
+    - imbalanced-learn
+    - shap
