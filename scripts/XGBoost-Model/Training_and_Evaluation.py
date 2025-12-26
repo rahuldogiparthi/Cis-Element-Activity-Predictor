@@ -339,7 +339,7 @@ import xgboost as xgb
 from scipy.stats import norm # To calculate p-values for permutation testing
 
 model = xgb.XGBClassifier()
-model.load_model('data/KIT_xgb_tuned_model.json')
+model.load_model('data/XGBoost/KIT_xgb_tuned_model.json')
 #model.classes_ = np.array([0, 1]) # Use if model fails to identify the class object
 
 # Retrive the features of the trained model
@@ -381,6 +381,7 @@ fpr, tpr, thresholds = roc_curve(y_test, y_probs)
 roc_auc = auc(fpr, tpr)
 
 # Plot
+
 plt.figure(figsize=(6, 6))
 plt.plot(fpr, tpr, color='#2c3e50', lw=2.5, label=f'Model ROC (AUC = {roc_auc:.3f})')
 plt.plot([0, 1], [0, 1], color='grey', lw=1, linestyle='--') # Random guess line
