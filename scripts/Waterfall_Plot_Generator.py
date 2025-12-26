@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # Input excel sheet can be replaced with KREs or EGR1 Sensitive KREs list to generate the waterfall plots
-df = pd.read_excel('/data/KREs.xlsx', sheet_name='Kit Activated')
+df = pd.read_excel('/data/KREs.xlsx', sheet_name='Sheet1')
 
 # Sort by score
 sorted_df = df.sort_values(by='Score', ascending=True).reset_index(drop=True)
