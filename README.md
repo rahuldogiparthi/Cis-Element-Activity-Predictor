@@ -24,17 +24,21 @@ The analysis pipeline relies on **Python 3.7.3** and **R 4.4.3**. Version contro
 
 To reproduce the analysis environment, please follow these steps exactly.
 
-### 1. Clone the Repository
+### Clone the Repository
 ```bash
 git clone https://github.com/rahuldogiparthi/Cis-Element-Activity-Predictor.git
 cd Cis-Element-Activity-Predictor
 ```
+### Create the Conda Environment
+Use conda environment if you face any package discrepancies
+```
 # Create the environment
 conda env create -f ciselementactivitypredictor.yml
-
+```
+```
 # Activate the environment
 conda activate cis-element-activity-predictor
-
+```
 ## Repository Structure
 
 ```text
