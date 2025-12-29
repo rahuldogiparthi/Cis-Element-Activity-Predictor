@@ -85,4 +85,4 @@ Processed Datasets (Zenodo): The pre-processed tables required to run the Machin
 3. Plotting Fonts: If plots fail to render specific fonts, ensure Arial/Helvetica is installed on your system, or modify the matplotlib params in the python scripts.
 
 ## Contact
-For questions regarding the code or analysis, please open an issue in this repository or contact: **[Rahul Dogiparthi](mailto:v.dogiparthi@unmc.edu)**
+For questions regarding the code or analysis, please open an issue in this repository or contact: **[Rahul Dogiparthi](mailto:v.dogiparthi@unmc.edu)** 
