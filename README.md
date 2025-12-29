@@ -67,7 +67,7 @@ conda activate cis-element-activity-predictor
 ```
 
 ### 3. Install Custom R Packages
-The packages BuenColors and gchromVAR are not available on Conda/CRAN. You must run the helper script to install them from GitHub:
+The package gchromVAR is not available on Conda/CRAN. You must run the helper script to install them from GitHub:
 ```
 Rscript R_other_dependencies.R
 ```
