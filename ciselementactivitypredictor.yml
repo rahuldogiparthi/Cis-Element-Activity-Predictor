@@ -5,7 +5,7 @@ channels:
   - defaults
 dependencies:
   - python=3.7
-  - r-base=4.4
+  - r-base=4.3
 
   - numpy
   - pandas
@@ -21,10 +21,10 @@ dependencies:
   - r-magrittr
   - r-tidyr
   - r-gtools
-  - r-biocparallel
   - r-devtools
 
   - bioconductor-genomicranges
+  - bioconductor-biocparallel
   - bioconductor-rsubread
   - bioconductor-chipqc
   - bioconductor-chromvar
