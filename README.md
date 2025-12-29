@@ -1,3 +1,4 @@
-# Cis Element Activity Predictor
+# Predicting Cis-Element Responses to Cell Signaling in Red Blood Cell Precursors
 
-## System Requirements
+## About
+Chromatin signatures at cis-regulatory elements can predict how they regulate transcription. However, accurate cell type-specific prediction of functional cis-elements remains a significant computational challenge due to the lack of context regarding the role of environmental stimuli that may alter activity. Most existing datasets use static molecular and sequence features which do not evaluate cis-element responses to extracellular cues. Here, we have developed a multi-factorial strategy that identifies, annotates, ranks and functionally tests candidates. We evaluated cis-element activity in response to the Kit receptor tyrosine kinase (activated by Stem Cell Factor (SCF)), given its crucial role in hematopoietic and erythroid progenitor cell (EPC) survival and lineage commitment. To investigate chromatin changes mediated by Kit/SCF, we performed ATAC-seq and RNA-seq in acutely SCF stimulated HUDEP-2 cells and mapped enhancer-promoter interactions using existing datasets.
