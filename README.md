@@ -7,38 +7,6 @@ RNA-seq data in acutely Kit-stimulated cells was filtered by Kit-Activated trans
 
 > **Note:** This repository provides the analysis workflow for reproducibility and transparency. It is not intended as a standalone software package.
 
-### Hardware
-* **Operating System:** Linux (tested on Ubuntu 20.04). Windows users are recommended to use WSL (Windows Subsystem for Linux).
-* **RAM:** Minimum 16GB recommended (required for `gchromVAR` analysis and SHAP value calculation).
-* **Processor:** Standard Multi-core CPU (4+ cores recommended for parallelized tasks).
-
-### Software Dependencies
-The analysis pipeline relies on **Python 3.7.3** and **R 4.4.3**. Version control and dependency management are handled via Conda to ensure reproducibility.
-
-**Core Libraries:**
-* **Machine Learning:** `XGBoost`, `TensorFlow`, `scikit-learn`, `SHAP`, `imbalanced-learn`
-* **Genomics (R):** `GenomicRanges`, `chromVAR`, `ChIPQC`, `BSgenome.Hsapiens.UCSC.hg19`
-* **Visualization:** `ggplot2`, `BuenColors`, `seaborn`, `matplotlib`
-
-## Installation & Setup
-
-To reproduce the analysis environment, please follow these steps exactly.
-
-### Clone the Repository
-```bash
-git clone https://github.com/rahuldogiparthi/Cis-Element-Activity-Predictor.git
-cd Cis-Element-Activity-Predictor
-```
-### Create the Conda Environment
-Use conda environment if you face any package discrepancies
-```
-# Create the environment
-conda env create -f ciselementactivitypredictor.yml
-```
-```
-# Activate the environment
-conda activate cis-element-activity-predictor
-```
 ## Repository Structure
 
 ```text
@@ -66,3 +34,55 @@ Cis-Element-Activity-Predictor/
 ---
 ```
 
+### Hardware
+* **Operating System:** Linux (tested on Ubuntu 20.04). Windows users are recommended to use WSL (Windows Subsystem for Linux).
+* **RAM:** Minimum 16GB recommended (required for `gchromVAR` analysis and SHAP value calculation).
+* **Processor:** Standard Multi-core CPU (4+ cores recommended for parallelized tasks).
+
+### Software Dependencies
+The analysis pipeline relies on **Python 3.7** and **R 4.3**. Version control and dependency management are handled via Conda to ensure reproducibility.
+
+**Core Libraries:**
+* **Machine Learning:** `XGBoost`, `TensorFlow`, `scikit-learn`, `SHAP`, `imbalanced-learn`
+* **Genomics (R):** `GenomicRanges`, `chromVAR`, `ChIPQC`, `BSgenome.Hsapiens.UCSC.hg19`
+* **Visualization:** `ggplot2`, `BuenColors`, `seaborn`, `matplotlib`
+
+## Installation & Setup
+
+To reproduce the analysis environment, please follow these steps exactly.
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/rahuldogiparthi/Cis-Element-Activity-Predictor.git
+cd Cis-Element-Activity-Predictor
+```
+### 2. Create the Conda Environment
+Use conda environment if you face any package discrepancies
+```
+# Create the environment
+conda env create -f ciselementactivitypredictor.yml
+
+# Activate the environment
+conda activate cis-element-activity-predictor
+```
+
+### 3. Install Custom R Packages
+The packages BuenColors and gchromVAR are not available on Conda/CRAN. You must run the helper script to install them from GitHub:
+```
+Rscript R_other_dependencies.R
+```
+
+## Data Availability
+Raw Data (GEO): RNA-seq and ATAC-seq.
+Processed Datasets (Zenodo): The pre-processed tables required to run the Machine Learning and Scoring scripts.
+
+> **Note:** Users wishing to run the code must download the datasets from the links in data/data_access.txt and place them in the data/ directory locally.
+
+## Troubleshooting
+
+1. "File Not Found" Errors: Ensure you have downloaded the data from Zenodo/GEO and placed it in the data/ folder. The scripts use relative paths (e.g., ../data/) and expect the files to be present.
+2. Memory Issues: If gchromVAR_Analysis.R crashes, try increasing the available RAM or running on a subset of peaks.
+3. Plotting Fonts: If plots fail to render specific fonts, ensure Arial/Helvetica is installed on your system, or modify the matplotlib params in the python scripts.
+
+## Contact
+For questions regarding the code or analysis, please open an issue in this repository or contact: **[Rahul Dogiparthi](mailto:v.dogiparthi@unmc.edu)**
