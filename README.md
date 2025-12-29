@@ -14,10 +14,21 @@ RNA-seq data in acutely Kit-stimulated cells was filtered by Kit-Activated trans
 ```text
 cis-element-activity-predictor/
 │
-├── data/                   # Contains data_access.txt (Links to external datasets)
-├── scripts/                # Analysis scripts
-│   ├── 01_preprocessing.R  # Data integration & matrix generation
-│   └── 02_ml_training.py   # XGBoost training & SHAP analysis
-├── environment.yml         # Conda environment configuration (R + Python)
-├── install_custom.R        # Helper script for GitHub-hosted R packages
-└── README.md               # Project Documentation
+├── data/                                                 # Contains datasets.txt (Links to GEO and Zenodo)
+│
+├── scripts/                                              # Main analysis scripts
+│   ├── Genome_Annotation.R                               # Genomic annotation of peaks
+│   ├── MAplot_for_ATACseq.R                              # Visualization of ATAC-seq peaks
+│   ├── gchromVAR_Analysis.R                              # gchromVAR analysis
+│   ├── KRE-Scoring.py                                    # KRE scoring
+│   ├── Categorizing_EGR1_Sensitivity_Across_Peaks.py     # Annotating EGR1-Sensitive and -Insensitive accessible peaks
+|   ├── EGR1-Sensitivity-Scatter-Plot.py                  # Visualization script
+│   ├── Bubble_Plot_Generator.py                          # Visualization script
+│   ├── Waterfall_Plot_Generator.py                       # Visualization script
+│   └── XGBoost-Model/                                    # XGBoost Model scripts
+│       ├── Training_and_Evaluation.py                    # Main scripts for XGBoost training and evaluation
+│       └── Scatterplot_FeatureImportances.py             # Model interpretation plotting
+│
+├── ciselementactivitypredictor.yml                       # Conda environment configuration
+├── R_other_dependencies.R                                # Helper script for other hosted R packages
+└── README.md                                             # Project documentation
