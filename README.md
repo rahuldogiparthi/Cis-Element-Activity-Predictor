@@ -7,12 +7,38 @@ RNA-seq data in acutely Kit-stimulated cells was filtered by Kit-Activated trans
 
 > **Note:** This repository provides the analysis workflow for reproducibility and transparency. It is not intended as a standalone software package.
 
----
+### Hardware
+* **Operating System:** Linux (tested on Ubuntu 20.04). Windows users are recommended to use WSL (Windows Subsystem for Linux).
+* **RAM:** Minimum 16GB recommended (required for `gchromVAR` analysis and SHAP value calculation).
+* **Processor:** Standard Multi-core CPU (4+ cores recommended for parallelized tasks).
+
+### Software Dependencies
+The analysis pipeline relies on **Python 3.7.3** and **R 4.4.3**. Version control and dependency management are handled via Conda to ensure reproducibility.
+
+**Core Libraries:**
+* **Machine Learning:** `XGBoost`, `TensorFlow`, `scikit-learn`, `SHAP`, `imbalanced-learn`
+* **Genomics (R):** `GenomicRanges`, `chromVAR`, `ChIPQC`, `BSgenome.Hsapiens.UCSC.hg19`
+* **Visualization:** `ggplot2`, `BuenColors`, `seaborn`, `matplotlib`
+
+## Installation & Setup
+
+To reproduce the analysis environment, please follow these steps exactly.
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/rahuldogiparthi/Cis-Element-Activity-Predictor.git
+cd Cis-Element-Activity-Predictor
+```
+# Create the environment
+conda env create -f ciselementactivitypredictor.yml
+
+# Activate the environment
+conda activate cis-element-activity-predictor
 
 ## Repository Structure
 
 ```text
-cis-element-activity-predictor/
+Cis-Element-Activity-Predictor/
 │
 ├── data/                                                 # Contains datasets.txt (Links to GEO and Zenodo)
 │
@@ -32,3 +58,7 @@ cis-element-activity-predictor/
 ├── ciselementactivitypredictor.yml                       # Conda environment configuration
 ├── R_other_dependencies.R                                # Helper script for other hosted R packages
 └── README.md                                             # Project documentation
+
+---
+```
+
