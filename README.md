@@ -45,7 +45,7 @@ The analysis pipeline relies on **Python 3.7** and **R 4.3**. Version control an
 **Core Libraries:**
 * **Machine Learning:** `XGBoost`, `TensorFlow`, `scikit-learn`, `SHAP`, `imbalanced-learn`
 * **Genomics (R):** `GenomicRanges`, `chromVAR`, `ChIPQC`, `BSgenome.Hsapiens.UCSC.hg19`
-* **Visualization:** `ggplot2`, `BuenColors`, `seaborn`, `matplotlib`
+* **Visualization:** `ggplot2`, `seaborn`, `matplotlib`
 
 ## Installation & Setup
 
