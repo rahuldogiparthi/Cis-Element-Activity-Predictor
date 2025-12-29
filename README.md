@@ -73,7 +73,7 @@ Rscript R_other_dependencies.R
 ```
 
 ## Data Availability
-Raw Data (GEO): RNA-seq and ATAC-seq.
+Raw Data (GEO): RNA-seq (GSE314032, GSE314034) and ATAC-seq (GSE314033).
 Processed Datasets (Zenodo): The pre-processed tables required to run the Machine Learning and Scoring scripts.
 
 > **Note:** Users wishing to run the code must download the datasets from the links in data/data_access.txt and place them in the data/ directory locally.
