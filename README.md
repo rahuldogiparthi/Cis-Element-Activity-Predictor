@@ -31,7 +31,6 @@ Cis-Element-Activity-Predictor/
 ├── R_other_dependencies.R                                # Helper script for other hosted R packages
 └── README.md                                             # Project documentation
 
----
 ```
 
 ### Hardware
