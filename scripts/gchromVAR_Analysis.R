@@ -91,6 +91,6 @@ rownames(mat) <- mat$Trait
 mat$Trait <- NULL
 mat <- as.matrix(mat)
 
-pdf("Fig1_gChromVAR_heatmap_zscores.pdf", width = 6, height = 8)
+pdf("gChromVAR_heatmap_zscores.pdf", width = 6, height = 8)
 pheatmap(mat)
 dev.off()
