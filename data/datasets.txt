@@ -6,4 +6,4 @@ RNA-seq (HUDEP-2):  https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE314032
 ATAC-seq (HUDEP-2): https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE314033
 RNA-seq (CD34+):    https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE314034
 
-Zenodo: Access the /data folder in [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18292718.svg)](https://doi.org/10.5281/zenodo.18292718) for input datasets
+Zenodo: Access the /data folder in 10.5281/zenodo.18292718 for input datasets
