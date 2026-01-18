@@ -32,4 +32,4 @@ sp <- ggplot(plot_df, aes(x = A, y = M, color = Class)) +
   theme_classic(base_size = 12) +
   theme(legend.title = element_blank())
 print(sp)
-ggsave("Fig1_MAnorm.pdf", plot=sp, width = 6, height = 5, units="in")
+ggsave("MAnorm_plot.pdf", plot=sp, width = 6, height = 5, units="in")
