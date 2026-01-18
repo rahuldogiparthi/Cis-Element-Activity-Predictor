@@ -1,6 +1,6 @@
 All input files have been deposited in Zenodo while the raw files are deposited in GEO
 
-You may view your GSE314032, GSE314033, GSE314034 Series records at:
+You may view GSE314032, GSE314033, GSE314034 Series records at:
 
 RNA-seq (HUDEP-2):  https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE314032
 ATAC-seq (HUDEP-2): https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE314033
