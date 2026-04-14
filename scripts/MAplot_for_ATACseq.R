@@ -11,7 +11,7 @@ Acol <- "A_value"
 Mcol <- "M_value"
 
 # Drop rows other than M and A
-plot_df <- na.omit(data.frame(A = A, M = M))
+plot_df <- na.omit(data.frame(A = df[[Acol]], M = df[[Mcol]]))
 
 cutoff <- 0.585 # Fold Change cut off at 1.5 in Log2 scale
 # Divide the peaks into classes based on fold change cutoffs
