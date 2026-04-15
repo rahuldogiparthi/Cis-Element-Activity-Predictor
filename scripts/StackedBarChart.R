@@ -1,5 +1,7 @@
+# Load libraries
 library(ggplot2)
 library(dplyr)
+# Create the dataframe
 kre_breakdown <- data.frame(
   Binding_Status = factor(
     c("AP1 + EGR1 Both", "AP1 Only", "EGR1 Only", "Neither"),
@@ -10,6 +12,7 @@ kre_breakdown <- data.frame(
 kre_breakdown <- kre_breakdown %>%
   mutate(Percentage = (Count / sum(Count)) * 100,
          Label = paste0(round(Percentage, 1), "% \n(n=", Count, ")"))
+# Generate plot
 ggplot(kre_breakdown, aes(x = "KREs", y = Percentage, fill = Binding_Status)) +
   geom_bar(stat = "identity", width = 0.4, color = "black", size = 0.5) +
   
