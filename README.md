@@ -12,21 +12,23 @@ RNA-seq data in acutely Kit-stimulated cells was filtered by Kit-Activated trans
 ```text
 Cis-Element-Activity-Predictor/
 │
-├── data/                                                 # Contains datasets.txt (Links to GEO and Zenodo)
-│
+├── data/                                                 
+│   ├── datasets.txt                                      # Links to GEO and Zenodo
 ├── scripts/                                              # Main analysis scripts
 │   ├── Genome_Annotation.R                               # Genomic annotation of peaks
 │   ├── MAplot_for_ATACseq.R                              # Visualization of ATAC-seq peaks
 │   ├── gchromVAR_Analysis.R                              # gchromVAR analysis
 │   ├── KRE-Scoring.py                                    # KRE scoring
 │   ├── Categorizing_EGR1_Sensitivity_Across_Peaks.py     # Annotating EGR1-Sensitive and -Insensitive accessible peaks
+│   ├── Co-factor_Motifs_BubblePlot_Generator.R           # Visualization script
 |   ├── EGR1-Sensitivity-Scatter-Plot.py                  # Visualization script
+|   ├── StackedBarChart.R                                 # Visualization script
 │   ├── Bubble_Plot_Generator.py                          # Visualization script
 │   ├── Waterfall_Plot_Generator.py                       # Visualization script
 │   └── XGBoost-Model/                                    # XGBoost Model scripts
 │       ├── Training_and_Evaluation.py                    # Main scripts for XGBoost training and evaluation
 │       └── Scatterplot_FeatureImportances.py             # Model interpretation plotting
-│
+├── LICENSE
 ├── ciselementactivitypredictor.yml                       # Conda environment configuration
 ├── R_other_dependencies.R                                # Helper script for other hosted R packages
 └── README.md                                             # Project documentation
@@ -74,9 +76,9 @@ Rscript R_other_dependencies.R
 ## Data Availability
 Raw Data (GEO): RNA-seq (GSE314032, GSE314034) and ATAC-seq (GSE314033).
 
-Processed Datasets (Zenodo): [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18292718.svg)](https://doi.org/10.5281/zenodo.18292718) The pre-processed tables required to run the Machine Learning and Scoring scripts.
+Processed Datasets (Zenodo): The pre-processed tables required to run the Machine Learning and Scoring scripts.
 
-Scripts (Zenodo): [![DOI](https://zenodo.org/badge/1117131640.svg)](https://doi.org/10.5281/zenodo.18292427) The scripts used to generate the data
+Scripts (Zenodo): The scripts used to generate the data
 
 > **Note:** Users wishing to run the code must download the datasets from the links in data/data_access.txt and place them in the data/ directory locally.
 
