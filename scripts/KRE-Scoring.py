@@ -44,7 +44,7 @@ score_df['Conservation-Scores'] = score_df['PhyloP'].apply(lambda x: 1 if x > 1 
 score_df['h3k27ac_Score'] = score_df['H3K27AC'].apply(lambda x: 1 if x == 1 else -1)
 
 # Scoring for TF occupancy
-score_df['Scores'] = score_df['CellType_Score'] + score_df['State_Score'] + score_df['THAP1']*0.01054761 + score_df['EGR1']*0.07722619 + score_df['JUN']*0.5341085 + score_df['JUND']*0.24352597 + score_df['MXI1']*0.031388287 + score_df['RUNX1']*0.006536656 + score_df['ATF3']*0.0399749 + score_df['PKNOX1']*0.03170987 + score_df['ATF2']*0.048396807 + score_df['CTCF']*0.12805343 + score_df['h3k27ac_Score'] + score_df['Conservation-Scores']
+score_df['Scores'] = score_df['CellType_Score'] + score_df['State_Score'] + score_df['THAP1']*0.01054761 + score_df['EGR1']*0.07722619 + score_df['JUN']*0.5341085 + score_df['JUND']*0.24352597 + score_df['MXI1']*0.031388287 + score_df['ATF3']*0.0399749 + score_df['PKNOX1']*0.03170987 + score_df['ATF2']*0.048396807 + score_df['CTCF']*0.12805343 + score_df['h3k27ac_Score'] + score_df['Conservation-Scores']
 score_df.drop(columns=['CellType_Score','State_Score','Conservation-Scores','h3k27ac_Score'],inplace=True)
 score_df.sort_values(by=['Scores'], ascending=False,inplace=True)
 #score_df.to_csv("KRE_Scores.csv",index=False)
